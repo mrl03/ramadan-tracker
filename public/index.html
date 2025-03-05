@@ -5,28 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ramadan Mubarak</title>
     <style>
+        /* Base Styles */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f0e6d6;
             color: #333;
             text-align: center;
-            padding: 50px;
+            padding: 20px;
+            margin: 0;
         }
         h1 {
-            font-size: 3em;
+            font-size: 2.5rem;
             color: #2c5d63;
+            margin: 20px 0;
         }
         p {
-            font-size: 1.5em;
-            margin: 20px 0;
+            font-size: 1.2rem;
+            margin: 15px 0;
         }
         .ramadan-img {
-            width: 300px;
-            margin: 20px 0;
+            max-width: 100%;
+            height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
         }
      
+
+        /* Responsive Styles */
+        @media (min-width: 600px) {
+            h1 {
+                font-size: 3rem;
+            }
+            p {
+                font-size: 1.5rem;
+            }
+            .ramadan-img {
+                width: 50%;
+            }
+        }
+
+        @media (min-width: 900px) {
+            h1 {
+                font-size: 4rem;
+            }
+            p {
+                font-size: 1.8rem;
+            }
+            .ramadan-img {
+                width: 40%;
+            }
+        }
     </style>
     <!-- Add the script tag with defer attribute -->
     <script src="script.js" defer></script>
